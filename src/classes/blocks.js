@@ -36,6 +36,7 @@ export class ColumnsBlock extends Block {
     super(value, options)
   }
   toHTML() {
+    if (typeof this.value === 'string') this.value = this.value.split(';')
     const html = this.value.map(col).join('')
 
     return row(html, css(this.options.styles))

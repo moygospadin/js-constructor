@@ -7,6 +7,35 @@ export function col(content) {
 }
 
 export function css(styles = {}) {
+  if (typeof styles === 'string') return styles
   const toString = (key) => `${key}: ${styles[key]}`
   return Object.keys(styles).map(toString).join(';')
+}
+
+export function block(type) {
+  let placeholder = ''
+  switch (type) {
+    case 'image':
+      placeholder = 'img url'
+      break
+    case 'columns':
+      placeholder = '1-st col;2-st col;'
+      break
+    default:
+      placeholder = 'value'
+      break
+  }
+  return `
+  <form name="${type}">
+  <h5>${type}</h5>
+  <div class="form-group">
+    <input class="form-control form-control-sm" name="value" placeholder="${placeholder}">
+  </div>
+
+  <div class="form-group">
+    <input class="form-control form-control-sm" name="styles" placeholder="styles">
+  </div>
+  <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
+</form>
+<hr>`
 }
